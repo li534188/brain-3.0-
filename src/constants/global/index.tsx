@@ -1,0 +1,5 @@
+export enum GLOBAL {
+    PAGEINDEX = "PAGEINDEX",
+    GETPAGEINDEX = "GETPAGEINDEX"
+}
+
