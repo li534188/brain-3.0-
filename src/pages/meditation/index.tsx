@@ -19,9 +19,9 @@ export interface Mstate{
   current: number
 }
 class Index extends Component<Iprops, Mstate> {
-  
+
   textInput: any;
-  
+
   constructor(props){
     super(props)
     this.state = {
@@ -45,7 +45,7 @@ class Index extends Component<Iprops, Mstate> {
     add();
     parentShow();
     Taro.navigateTo({
-      url: '/pages/info/index'
+      url: "/pages/info/index?name=vision"
     })
   }
 
@@ -61,6 +61,7 @@ class Index extends Component<Iprops, Mstate> {
   changeClassName = ()=>{
     console.log(this.textInput.current)
     // document.getElementById(this.state.pre).setAttribute("class", "item")
+    // eslint-disable-next-line react/no-find-dom-node
     ReactDOM.findDOMNode(this.textInput.current)
     // this.textInput.current.class = 'navigator-toch'
   }

@@ -1,35 +1,45 @@
 import React, { Component } from 'react'
-import Taro  from  '@tarojs/taro'
-import { View, Image } from '@tarojs/components'
+import Taro,{getCurrentInstance}  from  '@tarojs/taro'
+import { View, Image, Text, ScrollView } from '@tarojs/components'
 import { AtCurtain,AtButton } from 'taro-ui'
 // import { Canvas } from 'taro-ui'
 // import './index.scss'
-import BrainMain from '../../asset/brain-main.png'
+import BrainMain from '../../asset/brain-main3.png'
+import './index.scss'
 
 
 export interface Mystate{
-    isOpened:boolean
+    isOpened:boolean,
+    name:string
+}
+let data = {
+    vision:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域', url:''},
+    motion:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域', url:''},
+    hearing:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域', url:''},
+    lobe:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域', url:''},
+    cerebellum:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域', url:''},
 }
 export default class Info extends Component<any,Mystate> {
   constructor(props){
       super(props)
       this.state={
-        isOpened: false
+        isOpened: false,
+        name:"",
       }
   }
 
-  componentWillMount () { 
-
+  componentWillMount () {
+    let target = getCurrentInstance().router;
+    if(target){
+      console.log("9999999999999")
+      console.log(target.params)
+      this.setState({
+        name:target.params.name
+      })
+    }
   }
 
-  componentDidMount () { 
-      // 操作画布
-      const ctx  = Taro.createCanvasContext('poster')
-    //   const ctx = canvas.getContext("2d");
-    ctx.drawImage(BrainMain, 0, 0, 200, 200)
-    ctx.draw()
-    //   canvas.drawImage(BrainMain, 0, 0, 200, 200)
-    // const query = Taro.createSelectorQuery().in(this.$scope);
+  componentDidMount () {
   }
 
 
@@ -38,6 +48,7 @@ export default class Info extends Component<any,Mystate> {
   componentDidShow () { }
 
   componentDidHide () { }
+
   handleChange () {
     this.setState({
       isOpened: true
@@ -51,22 +62,30 @@ export default class Info extends Component<any,Mystate> {
   }
 
   render () {
+    const {name} = this.state;
     return (
         <View>
         <AtCurtain
-            isOpened={this.state.isOpened}
-            onClose={this.onClose.bind(this)}
+          isOpened={this.state.isOpened}
+          onClose={this.onClose.bind(this)}
         >
-            <View>
-                标题
+            <View className='title'>
+                {data[name].title}
             </View>
             <Image
-                style='width:100%;height:250px'
-                src={BrainMain}
+              style='width:100%;height:250px'
+              src={data[name].img}
             />
+            <ScrollView className='detail'>
+              <Text className='detail_info' >{data[name].info}</Text >
+            </ScrollView>
+            <View hover-class='#113809' className='link' onClick={()=>{console.log('我已被点击')}}>
+              查看训练方法
+            </View>
       </AtCurtain>
       <AtButton
-        onClick={this.handleChange.bind(this)}>
+        onClick={this.handleChange.bind(this)}
+      >
         右上关闭幕帘
       </AtButton>
       </View>

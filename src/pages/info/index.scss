@@ -1,0 +1,27 @@
+.title{
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+.detail{
+  text-align:center;
+  font-size: 25px;
+  height:20vh;
+
+  .detail_info{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;/* 这里控制行数 */
+    -webkit-box-orient: vertical;
+  }
+}
+
+.link{
+  text-decoration:underline;
+  text-align: center;
+  color: #3cc51f;
+}
+.link:hover{
+  color:#113809;
+}
