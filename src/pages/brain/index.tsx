@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Taro  from  '@tarojs/taro'
-import { View, Text,  Canvas, Image  } from '@tarojs/components'
+import { View, Text,  Canvas, Image, WebView } from '@tarojs/components'
 // import { Canvas } from 'taro-ui'
 // import './index.scss'
 import BrainMain from '../../asset/brain-main.png'
@@ -37,9 +37,7 @@ export default class Brain extends Component {
   render () {
     return (
       <View className='index'>
-        <Text>大脑实验室</Text>
-        <Canvas  style='width: 300px; height: 200px;' canvasId='poster' />
-        <Image src={BrainMain} style={{width:"145px", height:"126px"}}  />
+        <WebView src='http://127.0.0.1:3000' > </WebView>
       </View>
     )
   }

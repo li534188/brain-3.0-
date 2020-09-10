@@ -44,6 +44,9 @@ class Index extends Component<Iprops, Mstate> {
     const {add, parentShow} = this.props;
     add();
     parentShow();
+    Taro.navigateTo({
+      url: '/pages/info/index'
+    })
   }
 
   handleClick (value) {

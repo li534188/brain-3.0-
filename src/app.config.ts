@@ -5,6 +5,7 @@ export default {
     'pages/brain/index',
     'pages/community/index',
     'pages/mine/index',
+    'pages/info/index',
   ],
   window: {
     backgroundTextStyle: 'light',
