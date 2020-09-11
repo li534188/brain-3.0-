@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Taro,{getCurrentInstance}  from  '@tarojs/taro'
-import { View, Image, Text, ScrollView } from '@tarojs/components'
+import { View, Image, Text, Icon } from '@tarojs/components'
 import { AtCurtain,AtButton } from 'taro-ui'
 // import { Canvas } from 'taro-ui'
 // import './index.scss'
@@ -64,8 +64,8 @@ export default class Info extends Component<any,Mystate> {
   render () {
     const {name} = this.state;
     return (
-        <View>
-        <AtCurtain
+        <View className='wrapper'>
+        {/* <AtCurtain
           isOpened={this.state.isOpened}
           onClose={this.onClose.bind(this)}
         >
@@ -87,7 +87,34 @@ export default class Info extends Component<any,Mystate> {
         onClick={this.handleChange.bind(this)}
       >
         右上关闭幕帘
-      </AtButton>
+      </AtButton> */}
+        <View className='card'>
+          <View className='title'>
+            <View className='title_header'>
+              <Text>主要视觉区</Text>
+            </View>
+            <View className='title_detail'>
+              <Text>上皮层</Text>
+            </View>
+            <View className='title_detail'>
+              <Text>下皮层</Text>
+            </View>
+          </View>
+          <View className='img_wrapper'> 
+            <Image className='img_target' src={data[name].img}></Image>
+          </View>
+          <View className='detail'>
+            <View className='doc'>
+              描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言描述语言
+            </View>
+          </View>
+          <View hover-class='#113809' className='link' onClick={()=>{console.log('我已被点击')}}>
+            查看训练方法
+          </View>
+        </View>
+        <View className='clear'> 
+          <Icon type='clear' color="#d8d3d3"></Icon>
+        </View>
       </View>
     )
   }

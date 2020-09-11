@@ -1,27 +1,87 @@
-.title{
-  text-align: center;
-  font-size: 40px;
-  margin-bottom: 20px;
-}
-.detail{
-  text-align:center;
-  font-size: 25px;
-  height:20vh;
 
-  .detail_info{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;/* 这里控制行数 */
-    -webkit-box-orient: vertical;
-  }
-}
 
 .link{
+  width: 100%;
   text-decoration:underline;
   text-align: center;
   color: #3cc51f;
+  position: absolute;
+  bottom: 80px;
+  text-align: center;
 }
 .link:hover{
   color:#113809;
 }
+
+
+.wrapper{
+  width: 100%;
+  height: 100vh;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .card{
+    border-radius: 20px;
+    width: 90%;
+    height: 80%;
+    background:  linear-gradient(45deg,#7e16f5,#c779d0,#7c40dd,);
+    position: relative;
+    //清除元素浮动
+    &:after {  
+      content: ""; 
+      display: block; 
+      height: 0; 
+      clear: both; 
+      visibility: hidden;  
+    }
+    .title{
+      float: left;
+      width: 40%;
+      height: 30%;
+      padding: 40px 10px;
+      font-family: "Times New Roman", Times, serif;
+      .title_header{
+        font-size: 50px;
+        font-weight: bolder;
+      }
+      .title_detail{
+        font-size: 40px;
+        text-decoration:underline;
+      }
+
+    }
+    .img_wrapper{
+      float: left;
+      width: 45%;
+      height: 30%;
+      padding: 50px 50px 0 0;
+      .img_target{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .detail{
+      width: 100%;
+      height: 40%;
+      clear: both;
+      word-wrap:break-word;
+      overflow:hidden;
+      .doc{
+        display: -webkit-box;
+	      overflow: hidden;
+	      text-overflow: ellipsis;
+	      word-wrap: break-word;
+	      white-space: normal !important;
+	      -webkit-line-clamp: 5;	/*  行数*/
+        -webkit-box-orient: vertical;
+        
+      }
+    }
+  }
+  .clear{
+   margin-top: 20px;
+  }
+}
+
