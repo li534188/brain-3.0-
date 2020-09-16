@@ -12,6 +12,12 @@ export interface Mystate{
     isOpened:boolean,
     name:string
 }
+
+export interface Myprop{
+  data:{
+    selectModel:string
+  }
+}
 let data = {
     vision:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域视觉联络区主要包含了。。。区域', url:''},
     motion:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域', url:''},
@@ -19,8 +25,8 @@ let data = {
     lobe:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域', url:''},
     cerebellum:{title:'视觉联络区', img:BrainMain, info:'视觉联络区主要包含了。。。区域', url:''},
 }
-export default class Info extends Component<any,Mystate> {
-  constructor(props){
+export default class Info extends Component<Myprop,Mystate> {
+  constructor(props:Myprop){
       super(props)
       this.state={
         isOpened: false,
@@ -34,7 +40,7 @@ export default class Info extends Component<any,Mystate> {
       console.log("9999999999999")
       console.log(target.params)
       this.setState({
-        name:target.params.name
+        name:'vision'
       })
     }
   }
@@ -63,8 +69,9 @@ export default class Info extends Component<any,Mystate> {
 
   render () {
     const {name} = this.state;
+    const {data:{selectModel}} = this.props
     return (
-        <View className='wrapper'>
+        <View style={{display:(selectModel===''?'none':'flex')}} className='wrapper'>
         {/* <AtCurtain
           isOpened={this.state.isOpened}
           onClose={this.onClose.bind(this)}
