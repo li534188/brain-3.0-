@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Taro,{getCurrentInstance}  from  '@tarojs/taro'
 import { View, Image, Text, Icon } from '@tarojs/components'
-import { AtCurtain,AtButton } from 'taro-ui'
+import { AtCurtain,AtIcon  } from 'taro-ui'
 // import { Canvas } from 'taro-ui'
 // import './index.scss'
 import BrainMain from '../../asset/brain-main3.png'
@@ -71,7 +71,7 @@ export default class Info extends Component<Myprop,Mystate> {
     const {name} = this.state;
     const {data:{selectModel}} = this.props
     return (
-        <View style={{display:(selectModel===''?'none':'flex')}} className='wrapper'>
+        <View className='wrapper'>
         {/* <AtCurtain
           isOpened={this.state.isOpened}
           onClose={this.onClose.bind(this)}
@@ -95,7 +95,10 @@ export default class Info extends Component<Myprop,Mystate> {
       >
         右上关闭幕帘
       </AtButton> */}
-        <View className='card'>
+        <View className='level clear'>
+          <AtIcon value='chevron-down' size='30' color='#ffffff'></AtIcon>
+        </View>
+        <View className='level card'>
           <View className='title'>
             <View className='title_header'>
               <Text>主要视觉区</Text>
@@ -107,7 +110,7 @@ export default class Info extends Component<Myprop,Mystate> {
               <Text>下皮层</Text>
             </View>
           </View>
-          <View className='img_wrapper'> 
+          <View className='img_wrapper'>
             <Image className='img_target' src={data[name].img}></Image>
           </View>
           <View className='detail'>
@@ -119,9 +122,7 @@ export default class Info extends Component<Myprop,Mystate> {
             查看训练方法
           </View>
         </View>
-        <View className='clear'> 
-          <Icon type='clear' color="#d8d3d3"></Icon>
-        </View>
+
       </View>
     )
   }

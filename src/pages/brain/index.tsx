@@ -31,11 +31,11 @@ export default class Brain extends PureComponent<any, Mystate> {
       }
   }
 
-  componentWillMount () { 
+  componentWillMount () {
 
   }
 
-  componentDidMount () { 
+  componentDidMount () {
       // 操作画布
       const ctx  = Taro.createCanvasContext('poster')
     //   const ctx = canvas.getContext("2d");
@@ -96,7 +96,7 @@ export default class Brain extends PureComponent<any, Mystate> {
                         ))}
                     </View>
                 </View>
-                <View className='modal'>
+                <View  onClick={(e)=>{e.stopPropagation()}} className={`modal ${selectModel?'active':''}`}>
                   <Info data={{selectModel:selectModel}} />
                 </View>
       </View>
