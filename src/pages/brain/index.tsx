@@ -19,7 +19,7 @@ import cerebellumSelectSvg from '../../asset/cerebellum_select.svg'
 import sixSelectSvg from '../../asset/six_select.svg'
 import './index.scss'
 
-let partData = ['part_one','part_two','part_three','part_four','part_five','part_six',]
+let partData = ['vision','motion','hearing','lobe','cerebellum','part_six',]
 interface Mystate{
   selectModel:string
 }
@@ -36,13 +36,7 @@ export default class Brain extends PureComponent<any, Mystate> {
   }
 
   componentDidMount () {
-      // 操作画布
-      const ctx  = Taro.createCanvasContext('poster')
-    //   const ctx = canvas.getContext("2d");
-    ctx.drawImage(BrainMain, 0, 0, 200, 200)
-    ctx.draw()
-    //   canvas.drawImage(BrainMain, 0, 0, 200, 200)
-    // const query = Taro.createSelectorQuery().in(this.$scope);
+
   }
 
 
@@ -59,7 +53,7 @@ export default class Brain extends PureComponent<any, Mystate> {
     })
   }
 
-  test = ()=>{
+  closeModel = ()=>{
     this.setState({
       selectModel:'',
     })
@@ -67,38 +61,53 @@ export default class Brain extends PureComponent<any, Mystate> {
 
   render () {
     const {selectModel} = this.state;
-    console.log(selectModel)
     return (
-      <View className='index' onClick={this.test}>
+      <View className='index' onClick={this.closeModel}>
           <View className="tdc-main-right-demo">
-                    <View className="tdc-main-right-demo-brain">
-                        <View className={`tdc-brain-part tdc-frontal-lobe ${selectModel===partData[0]?'active':''}`}>
-                          <Image className='svg' src={selectModel===partData[0]?visionSelectSvg:visionSvg} />
-                        </View>
-                        <View className={`tdc-brain-part tdc-cerebellum ${selectModel===partData[4]?'active':''}`} >
-                          <Image className='svg' src={selectModel===partData[4]?motionSelectSvg:motionSvg} />
-                        </View>
-                        <View className={`tdc-brain-part tdc-occipital-lobe ${selectModel===partData[3]?'active':''}`}>
-                          <Image  className='svg' src={selectModel===partData[3]?hearingSelectSvg:hearingSvg} />
-                        </View>
-                        <View className={`tdc-brain-part tdc-parietal-lobe ${selectModel===partData[1]?'active':''}`} >
-                          <Image className='svg' src={selectModel===partData[1]?lobeSelectSvg:lobeSvg} />
-                        </View>
-                        <View className={`tdc-brain-part tdc-temporal-lobe ${selectModel===partData[2]?'active':''}`} >
-                          <Image className='svg' src={selectModel===partData[2]?sixSelectSvg:sixSvg} />
-                        </View>
-                        <View className={`tdc-brain-part tdc-brain-stem ${selectModel===partData[5]?'active':''}`} >
-                          <Image className='svg' src={selectModel===partData[5]?cerebellumSelectSvg:cerebellumSvg} />
-                        </View>
-                        {partData.map(item=>(
-                          <View className={item} onClick={(e)=>{this.clickEvent(e,item)}}>
-                          </View>
-                        ))}
+              <View className="tdc-main-right-demo-brain">
+                  <View className={`tdc-brain-part tdc-frontal-lobe ${selectModel===partData[0]?'active':''}`}>
+                    <Image className='svg' src={selectModel===partData[0]?visionSelectSvg:visionSvg} />
+                  </View>
+                  <View className={`tdc-brain-part tdc-parietal-lobe ${selectModel===partData[1]?'active':''}`} >
+                    <Image className='svg' src={selectModel===partData[1]?motionSelectSvg:motionSvg } />
+                  </View>
+                  <View className={`tdc-brain-part tdc-temporal-lobe ${selectModel===partData[2]?'active':''}`} >
+                    <Image className='svg' src={selectModel===partData[2]?hearingSelectSvg:hearingSvg } />
+                  </View>
+                  <View className={`tdc-brain-part tdc-occipital-lobe ${selectModel===partData[3]?'active':''}`}>
+                    <Image  className='svg' src={selectModel===partData[3]?lobeSelectSvg:lobeSvg} />
+                  </View>
+                  <View className={`tdc-brain-part tdc-cerebellum ${selectModel===partData[4]?'active':''}`} >
+                    <Image className='svg' src={selectModel===partData[4]?cerebellumSelectSvg:cerebellumSvg} />
+                  </View>
+                  <View className={`tdc-brain-part tdc-brain-stem ${selectModel===partData[5]?'active':''}`} >
+                    <Image className='svg' src={selectModel===partData[5]?sixSelectSvg:sixSvg} />
+                  </View>
+                  {partData.map(item=>(
+                    <View className={item} onClick={(e)=>{this.clickEvent(e,item)}}>
                     </View>
-                </View>
-                <View  onClick={(e)=>{e.stopPropagation()}} className={`modal ${selectModel?'active':''}`}>
-                  <Info data={{selectModel:selectModel}} />
-                </View>
+                  ))}
+              </View>
+              <View  onClick={(e)=>{e.stopPropagation()}} className={`modal ${selectModel?'active':''}`}>
+                <Info data={{selectModel:selectModel, closeModel:this.closeModel}} />
+              </View>
+          </View>
+          <View className='arrow'>
+            <View className='part_wisdom left_part'>
+              智
+            </View>
+            <View className='part_action right_part'>
+              行
+            </View>
+            <View className='part_balance left_part'>
+              衡
+            </View>
+            <View className='part_vision right_part'>
+              视
+            </View>
+            
+            
+          </View>
       </View>
     )
   }
