@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom'
 import Taro from '@tarojs/taro'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux'
-import { View, Text, Navigator, Button, } from '@tarojs/components'
+import { View, Text, Navigator, Button, Canvas} from '@tarojs/components'
 import { AtTabBar } from 'taro-ui'
 import * as  actions from '../../actions/counter'
 import  './index.scss'
+import CanvasCircle from '../component/canvasCircle'
 
 export interface Iprops {
   num: number,
@@ -21,6 +22,7 @@ export interface Mstate{
 class Index extends Component<Iprops, Mstate> {
 
   textInput: any;
+  private ctx;
 
   constructor(props){
     super(props)
@@ -32,7 +34,8 @@ class Index extends Component<Iprops, Mstate> {
 
   componentWillMount () { }
 
-  componentDidMount () { }
+  componentDidMount () { 
+  }
 
   componentWillUnmount () { }
 
@@ -91,6 +94,7 @@ class Index extends Component<Iprops, Mstate> {
           onClick={this.handleClick.bind(this)}
           current={this.state.current}
         />
+        <CanvasCircle />
       </View>
     )
   }

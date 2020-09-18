@@ -143,41 +143,74 @@
       top:0;
       width: 100%;
       height: 100%;
-      background-color: #00aa7f;
+      z-index: -1;
       overflow: hidden;
       @each $item in $parts {
         .part_#{$item}{
           position: absolute;
           border: 2px double #434343;
+          animation: hue 2s linear infinite;
+          width: 900px;
+          height:900px;
           @if $item == 'wisdom'{
+            
             top:0;
-            transform: translateX(-30%) rotate(-30deg)  translateY(-80%);
+            transform: translateX(-350px)   translateY(-800px) rotate(-30deg);
+            background: linear-gradient(to right,#6f6f6f 5%, #1e1e20);
           }
           @if $item == 'action'{
             right:0;
+            transform: translateX(650px)   translateY(-600px) rotate(60deg);
+            background: linear-gradient(to right,#1e1e20 5%,#6f6f6f );
           }
           @if $item == 'balance'{
-            right: 0;
-            bottom: 0;
-            transform: translateX(-30%) rotate(-30deg)  translateY(-80%); 
+            transform: translateX(480px)   translateY(850px) rotate(-30deg); 
+            background: linear-gradient(to right,#6f6f6f 5%, #1e1e20);
           }
           @if $item == 'vision'{
             bottom: 0;
+            transform: translateX(-650px)   translateY(450px) rotate(60deg);
+            background: linear-gradient(to right,#1e1e20 2%,#6f6f6f );
           }
         }
       }
-      .left_part{
-        width: 140%;
-        height:60%;
-        background-color: black;
+      .part_one{
+        top:30px;
+        left:30px;
       }
-      .right_part{
-        width: 30%;
-        height:70%;
-        background-color: black;
+      .part_two{
+        top:30px;
+        right:30px;
       }
+      .part_three{
+        bottom:120px;
+        right:30px;
+      }
+      .part_four{
+        bottom:120px;
+        left:30px;
+      }
+      .font{
+        width: 100px;
+        height: 100px;
+        z-index: 10;
+        position: absolute;
+        color:rgb(216, 211, 211);
+        font-family: "楷体","楷体_GB2312";
+        font-size: 50px;
+        font-weight: bolder;
+        text-align: center;
+        line-height: 100px;  
+      }
+      
     }
   }
+
+  @keyframes hue {
+    from { filter: hue-rotate(0deg); }
+    to   { filter: hue-rotate(360deg); }
+}
+
   .modal{
     position: absolute;
     width: 100%;

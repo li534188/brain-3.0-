@@ -4,7 +4,6 @@ import { View, Text,  Canvas, Image, WebView } from '@tarojs/components'
 // import { Canvas } from 'taro-ui'
 // import './index.scss'
 import Info from '../info/index'
-import BrainMain from '../../asset/brain-main.png'
 import visionSvg from '../../asset/vision.svg'
 import motionSvg from '../../asset/motion.svg'
 import hearingSvg from '../../asset/hearing.svg'
@@ -32,7 +31,6 @@ export default class Brain extends PureComponent<any, Mystate> {
   }
 
   componentWillMount () {
-
   }
 
   componentDidMount () {
@@ -64,6 +62,9 @@ export default class Brain extends PureComponent<any, Mystate> {
     return (
       <View className='index' onClick={this.closeModel}>
           <View className="tdc-main-right-demo">
+              <View>
+
+              </View>
               <View className="tdc-main-right-demo-brain">
                   <View className={`tdc-brain-part tdc-frontal-lobe ${selectModel===partData[0]?'active':''}`}>
                     <Image className='svg' src={selectModel===partData[0]?visionSelectSvg:visionSvg} />
@@ -92,22 +93,28 @@ export default class Brain extends PureComponent<any, Mystate> {
                 <Info data={{selectModel:selectModel, closeModel:this.closeModel}} />
               </View>
           </View>
-          <View className='arrow'>
+          {/* <View className='arrow'>
             <View className='part_wisdom left_part'>
+            </View>
+            <View className='part_one font'>
               智
             </View>
             <View className='part_action right_part'>
+            </View>
+            <View className='part_two font'>
               行
             </View>
             <View className='part_balance left_part'>
+            </View>
+            <View className='part_three font'>
               衡
             </View>
             <View className='part_vision right_part'>
+            </View>
+            <View className='part_four font'>
               视
             </View>
-            
-            
-          </View>
+          </View> */}
       </View>
     )
   }
