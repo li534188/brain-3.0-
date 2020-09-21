@@ -14,10 +14,10 @@ export default class CanvasCircle extends PureComponent{
 
     componentWillMount () {
       }
-    
+
       componentDidMount () {
         this.ctx = Taro.createCanvasContext("image-cropper");
-        
+
         addPie({r:50, width:200, height:200,
             data: [{
                 cost: 4.94,
@@ -48,27 +48,26 @@ export default class CanvasCircle extends PureComponent{
           console.log("call back");
         });
       }
-    
-    
+
+
       componentWillUnmount () { }
-    
+
       componentDidShow () {
-        
+
       }
 
 
-    
+
       componentDidHide () { }
 
       init = (res) =>{
-        // console.log('8989898989898998989')
-        //   console.log(res)
+
             const width = res[0].width
             const height = res[0].height
-        
+
             const canvas = res[0].node
             const ctx = canvas.getContext('2d')
-        
+
             const dpr = Taro.getSystemInfoSync().pixelRatio
             canvas.width = width * dpr
             canvas.height = height * dpr
@@ -81,10 +80,10 @@ export default class CanvasCircle extends PureComponent{
             ctx.stroke()
             ctx.fillRect(0, 0, 100, 100)
       }
-      
+
       render(){
           return(
-            <Canvas  type='' style='width: 300px; height: 200px;' id='image-cropper' canvasId='image-cropper' />
+            <Canvas  type='' style='width: 200px; height: 200px;' id='image-cropper' canvasId='image-cropper' />
           );
       }
 }
@@ -104,14 +103,14 @@ interface DrawPie{
 /**
  * 绘制饼图函数
  * 使用到的ES6语法有函数默认参数、解构、字符模板
- * 如果不熟悉，可以看看阮老师的《ECMAScript 6 入门》 
+ * 如果不熟悉，可以看看阮老师的《ECMAScript 6 入门》
  * 网址 http://es6.ruanyifeng.com/
  * 函数的默认参数
  * r 圆环的圆半径  data 数据项
  * width 图表宽度 height 图表高度
  */
 function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
-    let w = width; 
+    let w = width;
     let h = height; //将width、height赋值给w、h
     let originX = w / 2; //原点x值
     let originY = h / 2; //原点y值
@@ -119,7 +118,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
     let leftPoints:any[] = []; //保存在左边的点
     let rightPoints:any[] = []; //保存在右边的点,分出左右是为了计算两点垂直间距是否靠太近
     let fontSize = 12; //设置字体大小，像素
-    
+
     //total保存总花费,用于计算数据项占比
     let total = data.reduce(function(v, item) {
         return v + item.cost;
@@ -131,7 +130,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
       * 为了让饼图从笛卡坐标的0度开始
       * 起始角弧度需要设置为-.5 * Math.PI
       */
-    let sAngel = -.5 * Math.PI; 
+    let sAngel = -.5 * Math.PI;
     let eAngel = -.5 * Math.PI; //结束角弧度，初始值等于sAngel
     let aAngel = Math.PI * 2; //整圆弧度，用于计算数据项弧度
     let pointR = r + 10; //计算线条起始点的半径
@@ -144,7 +143,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
          * 等于上一项数据起始弧度值(sAngel)
          * 加数据占比(data[i].cost/total)乘以整圆弧度(aAngel)
          */
-        eAngel = sAngel + data[i].cost/total * aAngel ; 
+        eAngel = sAngel + data[i].cost/total * aAngel ;
         //画弧
         _drawArc(ctx, {
             origin: [originX, originY],
@@ -192,7 +191,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
                  * endPoint保存线条结束点坐标
                  * y值不变，在左边时结束点x为零
                  */
-                endPoint: [0, points[i][1]] 
+                endPoint: [0, points[i][1]]
             });
         } else { /* 否则在右边*/
             rightPoints.push({
@@ -202,25 +201,25 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
             });
         }
     }
-    
-    _makeUseable(rightPoints, false); //处理右边挤在一起的情况
-    _makeUseable(leftPoints.reverse(), true); //处理左边挤在一起的情况
-    leftPoints.reverse(); //为什么要翻转一下，看_makeUseable函数
-    
-    let i = 0;
-    for (let j = 0, len = rightPoints.length; j < len; j++) { // 绘制右侧线条、文本
-        _drawLine(ctx, {data:data[i], point:rightPoints[j], w, direct: 'right'});
-        i++;
-    }
-    for (let j = 0, len = leftPoints.length; j < len; j++) { // 绘制左侧线条、文本
-        _drawLine(ctx, {data:data[i], point:leftPoints[j], w});
-        i++;
-    }
+
+    // _makeUseable(rightPoints, false); //处理右边挤在一起的情况
+    // _makeUseable(leftPoints.reverse(), true); //处理左边挤在一起的情况
+    // leftPoints.reverse(); //为什么要翻转一下，看_makeUseable函数
+    // let i = 0;
+    // for (let j = 0, len = rightPoints.length; j < len; j++) { // 绘制右侧线条、文本
+    //     _drawLine(ctx, {data:data[i], point:rightPoints[j], w, direct: 'right'});
+    //     i++;
+    // }
+    // for (let j = 0, len = leftPoints.length; j < len; j++) { // 绘制左侧线条、文本
+    //     _drawLine(ctx, {data:data[i], point:leftPoints[j], w});
+    //     i++;
+    // }
     /* 再绘制一个圆盖住饼图，实现圆环效果 */
-    // _drawArc(ctx, {
-    //     origin: [originX, originY],
-    //     r: r / 5 * 3
-    // })
+    _drawArc(ctx, {
+        origin: [originX, originY],
+        r: r / 5 * 3
+    })
+    drawText(ctx,{cost:'80%'});
     /* 画弧函数 */
     function _drawArc(ctx, {color = '#fff',origin = [0, 0],r = 100,sAngel = 0, eAngel = 2 * Math.PI}) {
         ctx.beginPath(); //开始
@@ -236,7 +235,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
         ctx.beginPath(); //开始
         ctx.moveTo(...point.point); //移动画笔到线条起点
         ctx.strokeStyle = data.color; //设置线条颜色
-        if (point.turingPoint) //存在折点 
+        if (point.turingPoint) //存在折点
             ctx.lineTo(...point.turingPoint); //画一条到折点的线
         ctx.lineTo(...point.endPoint);//画一条到结束点的线
         ctx.stroke();//绘制已定义的路径
@@ -251,7 +250,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
     function _isUseable(arr) { // 判断是否会有数据挤在一起(两点最小间距是否都大于等于minPadding)
         if (arr.length <= 1)
             return true;
-        
+
         return arr.every(function(p, index, arr) {
             if (index === arr.length-1) {
                 //因为是当前项和下一项比较，所以index === arr.length-1直接返回true
@@ -266,7 +265,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
             }
         })
     }
-    function _makeUseable(arr, left) {// 处理挤在一起的情况 
+    function _makeUseable(arr, left) {// 处理挤在一起的情况
         let diff, turingAngel, x, maths = Math.sin,diffH, l;
         /**
          * 这里的思路是
@@ -286,7 +285,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
                         /**
                          * 判断当前的点是否还可以向上移动
                          * 上方第一个点最往上只可以移动到y值为0
-                         * 之后依次最往上只能移动动y值为：i * minPadding 
+                         * 之后依次最往上只能移动动y值为：i * minPadding
                          * 所以下面判断应该是：arr[i].endPoint[1] - (minPadding - diff) > i * minPadding
                          */
                         /**
@@ -329,20 +328,20 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
             }
         }
         /**
-         * 遍历已经可用的数据 
+         * 遍历已经可用的数据
          * 起点和结束点不在同一水平线上
          * 需要设置折点
          * 这里通过设置折线角度，计算出折点位置
          * 回头一想，其实可以用更简单的方法，想复杂了
          */
-        for (let i = 0, len = arr.length; i < len; i++) { 
+        for (let i = 0, len = arr.length; i < len; i++) {
             //起点和结束点y值不等，则不在同一水平线，需要设置折点
-            if (arr[i].point[1] !== arr[i].endPoint[1]) { 
+            if (arr[i].point[1] !== arr[i].endPoint[1]) {
                 turingAngel = 1 / 3 * Math.PI; //默认折线角度设置60度
                 //计算出起点和结束点高度差
-                diffH = arr[i].endPoint[1] - arr[i].point[1]; 
+                diffH = arr[i].endPoint[1] - arr[i].point[1];
                 //计算出起点和结束点水平距离l
-                l = Math.abs(arr[i].endPoint[0] - arr[i].point[0]); 
+                l = Math.abs(arr[i].endPoint[0] - arr[i].point[0]);
                 /**
                  * x 这里的本意是
                  * 想计算出折点和起始点的水平距离x
@@ -358,7 +357,7 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
                  * 大于起始点到结束的水平距离-40(留40放文字)
                  * 减小角度，计算新折点
                  */
-                while (x > (l - 40)) { 
+                while (x > (l - 40)) {
                     turingAngel /= 2;
                     x = maths(turingAngel) * (arr[i].endPoint[1] - arr[i].point[1]);
                 }
@@ -366,5 +365,16 @@ function addPie({r = 100,width = 450,height = 400,data = [], ctx}:DrawPie) {
                 arr[i].turingPoint = [arr[i].point[0] + (left ? -x : x), arr[i].endPoint[1]]
             }
         }
+    }
+
+    function drawText(ctx, data){
+      let _fontSize = '30'
+      ctx.font = `${_fontSize}px 微软雅黑`; //设置字体相关
+        ctx.fillStyle = '#000'; //设置字体颜色
+        ctx.textAlign = 'right';//设置文字对齐方式
+        //绘制数据项花费文字，垂直上移两个像素
+        console.log(11111111111111)
+        console.log(originX, originY)
+        ctx.fillText(data.cost, originX + 30, originY+10);
     }
 }

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import Taro  from  '@tarojs/taro'
-import { View, Text,  Canvas, Image, WebView } from '@tarojs/components'
+import { View, Text,  Canvas, Image, WebView, Swiper , SwiperItem  } from '@tarojs/components'
 // import { Canvas } from 'taro-ui'
 // import './index.scss'
 import Info from '../info/index'
@@ -17,6 +17,7 @@ import lobeSelectSvg from '../../asset/lobe_select.svg'
 import cerebellumSelectSvg from '../../asset/cerebellum_select.svg'
 import sixSelectSvg from '../../asset/six_select.svg'
 import './index.scss'
+import CanvasCircle from '../component/canvasCircle'
 
 let partData = ['vision','motion','hearing','lobe','cerebellum','part_six',]
 interface Mystate{
@@ -61,19 +62,16 @@ export default class Brain extends PureComponent<any, Mystate> {
     const {selectModel} = this.state;
     return (
       <View className='index' onClick={this.closeModel}>
-          <View className="tdc-main-right-demo">
-              <View>
-
-              </View>
-              <View className="tdc-main-right-demo-brain">
+          <View className='tdc-main-right-demo'>
+              <View className='tdc-main-right-demo-brain'>
                   <View className={`tdc-brain-part tdc-frontal-lobe ${selectModel===partData[0]?'active':''}`}>
                     <Image className='svg' src={selectModel===partData[0]?visionSelectSvg:visionSvg} />
                   </View>
                   <View className={`tdc-brain-part tdc-parietal-lobe ${selectModel===partData[1]?'active':''}`} >
-                    <Image className='svg' src={selectModel===partData[1]?motionSelectSvg:motionSvg } />
+                    <Image className='svg' src={selectModel===partData[1]?motionSelectSvg:motionSvg} />
                   </View>
                   <View className={`tdc-brain-part tdc-temporal-lobe ${selectModel===partData[2]?'active':''}`} >
-                    <Image className='svg' src={selectModel===partData[2]?hearingSelectSvg:hearingSvg } />
+                    <Image className='svg' src={selectModel===partData[2]?hearingSelectSvg:hearingSvg} />
                   </View>
                   <View className={`tdc-brain-part tdc-occipital-lobe ${selectModel===partData[3]?'active':''}`}>
                     <Image  className='svg' src={selectModel===partData[3]?lobeSelectSvg:lobeSvg} />
@@ -92,6 +90,29 @@ export default class Brain extends PureComponent<any, Mystate> {
               <View  onClick={(e)=>{e.stopPropagation()}} className={`modal ${selectModel?'active':''}`}>
                 <Info data={{selectModel:selectModel, closeModel:this.closeModel}} />
               </View>
+              <View className='swiper_view'>
+                <Swiper
+                  className='test-h'
+                  indicatorColor='#999'
+                  indicatorActiveColor='#333'
+                  indicatorDots
+                  circular
+                  autoplay
+                >
+                  <SwiperItem>
+                    <View className='demo-text-1'>
+                      <CanvasCircle />
+                    </View>
+                  </SwiperItem>
+                  <SwiperItem>
+                    <View className='demo-text-2'>2</View>
+                  </SwiperItem>
+                  <SwiperItem>
+                    <View className='demo-text-3'>3</View>
+                  </SwiperItem>
+                </Swiper>
+              </View>
+
           </View>
           {/* <View className='arrow'>
             <View className='part_wisdom left_part'>
@@ -115,6 +136,7 @@ export default class Brain extends PureComponent<any, Mystate> {
               视
             </View>
           </View> */}
+
       </View>
     )
   }

@@ -2,13 +2,23 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content:  space-around;
     align-items: center;
+    flex-direction: column;
   }
   .tdc-main-right-demo-brain {
     position: relative;
     width: 60%;
-    height: 80%;
+    height: 40%;
+    margin-top:-25%;
+  }
+  .swiper_view{
+    width: 100%;
+    height: 30%;
+    .test-h{
+      width: 100%;
+      height: 100%;
+    }
   }
   .tdc-main-right-demo-brain:after{
     content: '';
@@ -153,7 +163,7 @@
           width: 900px;
           height:900px;
           @if $item == 'wisdom'{
-            
+
             top:0;
             transform: translateX(-350px)   translateY(-800px) rotate(-30deg);
             background: linear-gradient(to right,#6f6f6f 5%, #1e1e20);
@@ -164,7 +174,7 @@
             background: linear-gradient(to right,#1e1e20 5%,#6f6f6f );
           }
           @if $item == 'balance'{
-            transform: translateX(480px)   translateY(850px) rotate(-30deg); 
+            transform: translateX(480px)   translateY(850px) rotate(-30deg);
             background: linear-gradient(to right,#6f6f6f 5%, #1e1e20);
           }
           @if $item == 'vision'{
@@ -200,9 +210,9 @@
         font-size: 50px;
         font-weight: bolder;
         text-align: center;
-        line-height: 100px;  
+        line-height: 100px;
       }
-      
+
     }
   }
 
@@ -219,6 +229,7 @@
     transition: top 2s ease, opacity 2s ease;
     z-index: 0;
     opacity: 0;
+    flex: none;
   }
   .modal.active{
     z-index: 20;
